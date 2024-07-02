@@ -20,7 +20,7 @@ import org.springframework.http.HttpHeaders;
         public GroupedOpenApi api() {
             return GroupedOpenApi.builder()
                     .group("api")
-                    .pathsToMatch("/api/**")
+                    .pathsToMatch("/api/**", "/auth/**", "/demo/**")
                     .packagesToScan("io.tutoriel.spring.garageApp.controllers")
                     .build();
         }
@@ -39,7 +39,9 @@ import org.springframework.http.HttpHeaders;
                                     .email("makenabgte@mail")))
                     .addSecurityItem(new SecurityRequirement().addList(HttpHeaders.AUTHORIZATION))
                     .paths(new Paths()
-                            .addPathItem("/api", new PathItem()));
+                            .addPathItem("/api", new PathItem())
+                            .addPathItem("/auth", new PathItem())
+                    );
 
 //                                new Operation().operationId("getApi")
 //                                        .description("Get API information")
@@ -47,7 +49,5 @@ import org.springframework.http.HttpHeaders;
 //                                              new ApiResponse().description("Successful operation"))))));
         }
 
-
-
-    }
+}
 

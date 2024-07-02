@@ -13,9 +13,7 @@ public class GarageService {
     @Autowired
     private CarRepository carRepository;
     public List<Car> getAll(){
-        List<Car> cars = new ArrayList<>();
-        carRepository.findAll().forEach(car->cars.add(car));
-        return cars;
+        return carRepository.findAll();
         //    return carRepository.findAll();
     }
     public Car create(Car car){
@@ -24,6 +22,8 @@ public class GarageService {
     public void delete (long id){
         carRepository.deleteById(id);
     }
+
+    public void deleteAll (List<Long> ids) { carRepository.deleteAllById(ids);}
 
     public Car getById(long id){
         Car car = carRepository.findById(id).orElse( null);
@@ -34,6 +34,7 @@ public class GarageService {
         Car carBD = carRepository.findById(id).orElse( null);
         carBD.setBrand(car.getBrand());
         carBD.setModel(car.getModel());
+        carBD.setColor(car.getColor());
 
         return carRepository.save(carBD);
     }
